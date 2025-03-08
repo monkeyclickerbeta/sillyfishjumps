@@ -5,7 +5,7 @@ form.addEventListener("submit", async (event) => {
   window.navigator.serviceWorker.register("/lab.js", {
     scope: '/assignments/',
   }).then(() => {
-    let url = input.value.trim();
+    let url = input.value.toLowerCase().trim();
     if (!isUrl(url)) url = "https://search.yahoo.com/search?q=" + url;
     else if (!(url.startsWith("https://") || url.startsWith("http://"))) url = "http://" + url;
     localStorage.setItem("encodedUrl", __uv$config.encodeUrl(url));
