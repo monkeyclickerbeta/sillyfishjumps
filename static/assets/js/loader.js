@@ -88,7 +88,7 @@ searchBar.addEventListener("keydown", function(event) {
 			if (/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/.test(inputUrl)) {
 				document.getElementById('siteurl').src = scope + Ultraviolet.codec.xor.encode(inputUrl);
 			} else {
-				document.getElementById('siteurl').src = scope + Ultraviolet.codec.xor.encode(inputUrl.includes('.') ? 'https://' + inputUrl : 'https://yandex.com/search/touch/?text=' + encodeURIComponent(inputUrl));
+				document.getElementById('siteurl').src = scope + Ultraviolet.codec.xor.encode(inputUrl.includes('.') ? 'https://' + inputUrl : 'https://www.bing.com/search?q=%s' + encodeURIComponent(inputUrl));
 			}
 		});
 	}
