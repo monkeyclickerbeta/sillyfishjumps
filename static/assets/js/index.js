@@ -3,19 +3,26 @@ const input = document.querySelector("input");
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  window.navigator.serviceWorker.register("/lab.js", {
-    scope: '/assignments/',
-  }).then(() => {
+  
+  try {
+    await window.navigator.serviceWorker.register("/lab.js", {
+      scope: '/assignments/',
+    });
+    
     let url = input.value.toLowerCase().trim();
-    if (!isUrl(url)) url = "https://search.yahoo.com/search?q=" + url;
-    else if (!(url.startsWith("https://") || url.startsWith("http://"))) url = "http://" + url;
-
+    
+    if (!isUrl(url)) {
+      url = "https://search.yahoo.com/search?q=" + encodeURIComponent(url);
+    } else if (!(url.startsWith("https://") || url.startsWith("http://"))) {
+      url = "http://" + url;
+    }
+    
     // Ensure the URL is properly encoded without appending ?mobile=true
     localStorage.setItem("encodedUrl", __uv$config.encodeUrl(url));
     location.href = "/mastery";
-  }).catch((error) => {
+  } catch (error) {
     console.error("ServiceWorker registration failed: ", error);
-  });
+  }
 });
 
 function isUrl(val = "") {
