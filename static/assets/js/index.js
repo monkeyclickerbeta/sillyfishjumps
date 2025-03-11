@@ -1,36 +1,38 @@
-const form = document.querySelector("form");
-const input = document.querySelector("input");
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form");
+  const input = document.querySelector("input");
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  
-  try {
-    const registration = await navigator.serviceWorker.register("/lab.js", {
-      scope: '/assignments/',
-    });
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-    registration.onupdatefound = () => {
-      const installingWorker = registration.installing;
-      installingWorker.onstatechange = () => {
-        if (installingWorker.state === 'installed') {
-          let url = input.value.toLowerCase().trim();
-          if (!isUrl(url)) url = "https://search.yahoo.com/search?q=" + url;
-          else if (!(url.startsWith("https://") || url.startsWith("http://"))) url = "http://" + url;
+    try {
+      const registration = await navigator.serviceWorker.register("/lab.js", {
+        scope: '/assignments/',
+      });
 
-          // Remove or modify this line if you do not want to append ?mobile=true
-          // url = url + "?mobile=true";
+      registration.onupdatefound = () => {
+        const installingWorker = registration.installing;
+        installingWorker.onstatechange = () => {
+          if (installingWorker.state === 'installed') {
+            let url = input.value.toLowerCase().trim();
+            if (!isUrl(url)) url = "https://search.yahoo.com/search?q=" + url;
+            else if (!(url.startsWith("https://") || url.startsWith("http://"))) url = "http://" + url;
 
-          localStorage.setItem("encodedUrl", __uv$config.encodeUrl(url));
-          location.href = "/mastery";
-        }
+            // Remove or modify this line if you do not want to append ?mobile=true
+            // url = url + "?mobile=true";
+
+            localStorage.setItem("encodedUrl", __uv$config.encodeUrl(url));
+            location.href = "/mastery";
+          }
+        };
       };
-    };
-  } catch (error) {
-    console.error('Service worker registration failed:', error);
+    } catch (error) {
+      console.error('Service worker registration failed:', error);
+    }
+  });
+
+  function isUrl(val = "") {
+    if (/^http(s?):\/\//.test(val) || (val.includes(".") && val.substr(0, 1) !== " ")) return true;
+    return false;
   }
 });
-
-function isUrl(val = "") {
-  if (/^http(s?):\/\//.test(val) || (val.includes(".") && val.substr(0, 1) !== " ")) return true;
-  return false;
-}
