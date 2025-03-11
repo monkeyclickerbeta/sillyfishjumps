@@ -27,7 +27,7 @@ loadCSS('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icon
 
 if(window.location.pathname === "/index.html" || window.location.pathname === "/") {
   console.log("[✔️] Index.html");
-  const options = ["Right-Click to access more features", "Set a custom background in settings.", "Tab Cloaking is highly recommended", "About:Blank Cloak is highly recommended", "This site was origin[...]"];
+  const options = ["Right-Click to access more features", "Set a custom background in settings.", "Tab Cloaking is highly recommended", "About:Blank Cloak is highly recommended", "This site was originally built as a joke."];
 
   function getRandomOption() {
     const randomNumber = Math.floor(Math.random() * options.length);
@@ -52,16 +52,9 @@ if(window.location.pathname === "/index.html" || window.location.pathname === "/
 window.addEventListener("load", function() {
   loadScript("/worker.js");
 
-  // Check if the user is on a mobile device
-  function isMobileDevice() {
-    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  }
-
-  // Redirect to mobile version or hide elements based on user agent
-  if(isMobileDevice() && (window.location.pathname === "/index.html" || window.location.pathname === "/")) {
-    location.href = "/mobile.html";
-  }
-
+  // Always redirect to mobile version
+  location.href = "/mobile.html";
+  
   if(window.location.pathname === '/loading.html') {
     var rm = document.querySelector('.themesExcluded');
     rm.style.display = 'none';
