@@ -10,9 +10,8 @@ form.addEventListener("submit", async (event) => {
     if (!isUrl(url)) url = "https://search.yahoo.com/search?q=" + url;
     else if (!(url.startsWith("https://") || url.startsWith("http://"))) url = "http://" + url;
     
-    if (isMobile()) {
-      url = url + "?mobile=true";
-    }
+    // Always consider the user to be on a mobile device
+    url = url + "?mobile=true";
     
     localStorage.setItem("encodedUrl", __uv$config.encodeUrl(url));
     location.href = "/mastery";
@@ -22,8 +21,4 @@ form.addEventListener("submit", async (event) => {
 function isUrl(val = "") {
   if (/^http(s?):\/\//.test(val) || (val.includes(".") && val.substr(0, 1) !== " ")) return true;
   return false;
-}
-
-function isMobile() {
-  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 }
