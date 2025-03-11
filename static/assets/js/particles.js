@@ -727,7 +727,7 @@ if (selectedTheme === "starry") {
           line_linked: {
             enable: false,
             distance: 150,
-            color: "#A020F0",
+            color: "00008B",
             opacity: 0.4,
             width: 1,
           },
