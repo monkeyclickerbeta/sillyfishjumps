@@ -3,10 +3,11 @@ const input = document.querySelector("input");
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+  
   window.navigator.serviceWorker.register("/lab.js", {
     scope: '/assignments/',
   }).then(() => {
-    let url = input.value.toLowerCase().trim();
+    let url = input.value.trim().toLowerCase();
 
     if (!isUrl(url)) {
       url = "https://search.yahoo.com/search?p=" + encodeURIComponent(url);
@@ -14,11 +15,18 @@ form.addEventListener("submit", async (event) => {
       url = "http://" + url;
     }
 
-    // Remove or modify this line if you do not want to append ?mobile=true
-    // url = url + "?mobile=true";
-    
-    localStorage.setItem("encodedUrl", __uv$config.encodeUrl(url));
-    location.href = "/mastery";
+    console.log("Redirecting to:", url); // Debugging - Check the final URL in the browser console
+
+    try {
+      localStorage.setItem("encodedUrl", __uv$config.encodeUrl(url));
+      setTimeout(() => {
+        location.href = "/mastery";
+      }, 10);
+    } catch (error) {
+      console.error("Error saving to localStorage:", error);
+    }
+  }).catch(error => {
+    console.error("Service Worker registration failed:", error);
   });
 });
 
