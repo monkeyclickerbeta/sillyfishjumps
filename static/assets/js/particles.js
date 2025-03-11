@@ -574,7 +574,7 @@ if (selectedTheme === "starry") {
             },
           },
           color: {
-            value: "#000080",
+            value: "#476498",
           },
           shape: {
             type: "circle",
@@ -687,7 +687,7 @@ if (selectedTheme === "starry") {
             },
           },
           color: {
-            value: "#FFFFF",
+            value: "#476498",
           },
           shape: {
             type: "circle",
@@ -727,7 +727,7 @@ if (selectedTheme === "starry") {
           line_linked: {
             enable: false,
             distance: 150,
-            color: "00008B",
+            color: "#ffffff",
             opacity: 0.4,
             width: 1,
           },
