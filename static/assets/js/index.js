@@ -9,12 +9,12 @@ form.addEventListener("submit", async (event) => {
     let url = input.value.toLowerCase().trim();
     if (!isUrl(url)) url = "https://search.yahoo.com/search?q=" + url;
     else if (!(url.startsWith("https://") || url.startsWith("http://"))) url = "http://" + url;
-    
-    // Remove or modify this line if you do not want to append ?mobile=true
-    // url = url + "?mobile=true";
-    
+
+    // Ensure the URL is properly encoded without appending ?mobile=true
     localStorage.setItem("encodedUrl", __uv$config.encodeUrl(url));
     location.href = "/mastery";
+  }).catch((error) => {
+    console.error("ServiceWorker registration failed: ", error);
   });
 });
 
