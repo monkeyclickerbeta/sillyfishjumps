@@ -10,8 +10,8 @@ form.addEventListener("submit", async (event) => {
     if (!isUrl(url)) url = "https://search.yahoo.com/search?q=" + url;
     else if (!(url.startsWith("https://") || url.startsWith("http://"))) url = "http://" + url;
     
-    // Always consider the user to be on a mobile device
-    url = url + "?mobile=true";
+    // Remove or modify this line if you do not want to append ?mobile=true
+    // url = url + "?mobile=true";
     
     localStorage.setItem("encodedUrl", __uv$config.encodeUrl(url));
     location.href = "/mastery";
