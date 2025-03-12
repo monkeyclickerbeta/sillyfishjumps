@@ -6,7 +6,7 @@ form.addEventListener("submit", async (event) => {
     scope: '/assignments/',
   }).then(() => {
     let url = input.value.toLowerCase().trim();
-    if (!isUrl(url)) url = "https://duckduckgo.com/?q=" + url;
+    if (!isUrl(url)) url = "https://search.yahoo.com/search?p=" + url;
     else if (!(url.startsWith("https://") || url.startsWith("http://"))) url = "http://" + url;
     localStorage.setItem("encodedUrl", __uv$config.encodeUrl(url));
     location.href = "/mastery";
