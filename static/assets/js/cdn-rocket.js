@@ -34,7 +34,7 @@ if (blankerCheck === "enabled") {
       iframe.style.border = iframe.style.outline = "none";
       iframe.src = location.href;
       popup.document.body.appendChild(iframe);
-      location.replace("https://www.google.com");
+      location.replace("https://yahoo.com");
     }
   }
 }
