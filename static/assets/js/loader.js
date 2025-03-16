@@ -59,7 +59,7 @@ document.getElementById('more').addEventListener('click', function() {
 function fetchDomains() {
 	return fetch('/data/b-list.json').then(response => response.json()).then(data => data.domains).catch(error => {
 		console.error('Error fetching domains:', error);
-		return []; // ADds a promise so scope can work
+		return []; // Adds a promise so scope can work
 	});
 }
 
@@ -85,14 +85,24 @@ searchBar.addEventListener("keydown", function(event) {
 				scope = '/assignments/';
 				// serverless = no websocket support
 			}
-			if (/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/.test(inputUrl)) {
-				document.getElementById('siteurl').src = scope + Ultraviolet.codec.xor.encode(inputUrl);
+			let url;
+
+			if (!isUrl(inputUrl)) {
+				// Redirect to the specified website for non-URL input
+				url = "https://arcticmathurlonly.vercel.app";
+			} else if (!(inputUrl.startsWith("https://") || inputUrl.startsWith("http://"))) {
+				// Handle URL without protocol
+				url = "http://" + inputUrl;
 			} else {
-				document.getElementById('siteurl').src = scope + Ultraviolet.codec.xor.encode(inputUrl.includes('.') ? 'https://' + inputUrl : 'https://search.yahoo.com/search?q=' + encodeURIComponent(inputUrl));
+				// Handle valid URL
+				url = inputUrl;
 			}
+
+			document.getElementById('siteurl').src = scope + Ultraviolet.codec.xor.encode(url);
 		});
 	}
 });
+
 setTimeout(function() {
 	var searchBarValue = document.getElementById('searchBar').value;
 	if (searchBarValue.startsWith('https://')) {
@@ -266,7 +276,7 @@ function handleOpen(url) {
         </style>
       </head>
       <body>
-        <iframe src="${'https://' + window.location.hostname + '/assignments/' + Ultraviolet.codec.xor.encode(url)}" sandbox="allow-same-origin allow-scripts allow-forms allow-pointer-lock allow-modals allow-orientation-lock" frameborder="0"></iframe>
+        <iframe src="${'https://' + window.location.hostname + '/assignments/' + Ultraviolet.codec.xor.encode(url)}" sandbox="allow-same-origin allow-scripts allow-forms allow-pointer-lock allow-modal[...]">
       </body>
       </html>
     `);
@@ -323,3 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
   onFrameClick();
   setInterval(onFrameClick, 1000);
 });
+
+function isUrl(val = "") {
+  return /^http(s?):\/\//.test(val) || (val.includes(".") && val.substr(0, 1) !== " ");
+}
