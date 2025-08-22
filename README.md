@@ -15,7 +15,6 @@ Arctic 1.0 works on all devices and gives you access to almost any website, incl
 - Works on **all devices**
 - Bypasses most school and work restrictions
 - Fast and easy to use
-- Constantly updated with new links
 
 ---
 
