@@ -10,7 +10,6 @@ Arctic 1.0 works on all devices and gives you access to almost any website, incl
 
 ## 🔗 Proxy Links
 
-Check out the [Links Page](#) to find all active Arctic 1.0 links.
 
 > ⚠️ If one link is blocked, just try another. If all links are blocked, don’t worry — new Arctic 1.0 links are added regularly and may be unblocked at your school.
 
