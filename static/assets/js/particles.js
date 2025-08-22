@@ -574,7 +574,7 @@ if (selectedTheme === "starry") {
             },
           },
           color: {
-            value: "#ADD8E6",
+            value: "#476498",
           },
           shape: {
             type: "circle",
